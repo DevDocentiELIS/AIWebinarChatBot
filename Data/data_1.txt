@@ -1,0 +1,11 @@
+Presentazione corso
+
+Il Master Intelligenza Artificiale e Machine Learning di ELIS nasce per rispondere alla crescente domanda di professionisti in Intelligenza artificiale (AI) e machine learning (ML), ambiti in forte espansione a livello globale.
+
+Negli ultimi anni, l'AI ha rapidamente trasformato numerosi settori, automatizzando processi complessi, migliorando l'analisi dei dati e consentendo lo sviluppo di tecnologie innovative come il
+riconoscimento vocale e visivo, la guida autonoma le interazioni automatizzate con i clienti e molto
+altro. Questo progresso tecnologico sta generando nuove opportunità di carriera, con competenze
+in AI e ML sempre più richieste nel mercato del lavoro.
+
+Attualmente, il valore globale del mercato dell'AI è stimato a circa 150 miliardi di dollari e si prevede
+che raggiunga oltre 1.800 miliardi entro il 2030. Questa espansione è trainata dalla crescente integrazione dell'AI in settori come sanità, finanza, produzione e intrattenimento, dove le applicazioni dell'intelligenza artificiale migliorano la precisione, riducono i costi e ottimizzano le operazioni aziendali.
