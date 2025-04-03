@@ -1,4 +1,5 @@
-from langchain_community.document_loaders import PyPDFLoader  # or use PDFPlumberLoader
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import DirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
 from langchain_ollama import OllamaEmbeddings
@@ -6,6 +7,31 @@ from Config.colors import ColorText
 
 __OPS_SUCCESS_PREFIX = "[SUCCESS]"
 __OPS_FAILURE_PREFIX = "[FAILURE]"
+
+
+def __load_from_directory(data_dir_path, file_ext, with_example=False):
+    ops_prefix = f"[CONFIG][VECTOR_DATABASE][DATA_SOURCE]"
+    print(ColorText.colorize(f"{ops_prefix} Attempting to load {file_ext} data from source: {data_dir_path}.", ColorText.CYAN))
+    try:
+        loader = DirectoryLoader(data_dir_path, glob=f"**/*.{file_ext}", show_progress=True, use_multithreading=True)
+        data = loader.load()
+        print(
+            ColorText.colorize(
+                f"{ops_prefix}{__OPS_SUCCESS_PREFIX} Correctly loaded n: {len(data)} - {file_ext} data from source: {data_dir_path}.",
+                ColorText.GREEN
+            )
+        )
+        if with_example:
+            print("sample data from first doc")
+            print(data[0].page_content[:100])
+        return data
+    except FileNotFoundError:
+        print(
+            ColorText.colorize(
+                f"{ops_prefix}{__OPS_FAILURE_PREFIX} Failed loading data from source {data_dir_path}. File not Found",
+                ColorText.RED)
+        )
+        return None
 
 
 def __load_pdf_data(file_path):
@@ -38,9 +64,9 @@ def __embed_data(text_data, chunk_size, chunk_overlap, embedding_model):
     return all_splits, embeddings
 
 
-def create_chroma_vector_store_from_pdf_data(pdf_file_path, chunk_size, chunk_overlap, embedding_model):
+def create_chroma_vector_store_from_pdf_data(data_dir_path, file_ext, chunk_size, chunk_overlap, embedding_model):
     ops_prefix = f"[CONFIG][VECTOR_DATABASE][CREATING_CHROMA_VECTOR_STORAGE]"
-    source_data = __load_pdf_data(pdf_file_path)
+    source_data = __load_from_directory(data_dir_path, file_ext)
 
     if source_data:
         print(ColorText.colorize(f"{ops_prefix} Attempting to create Chroma Vector DB", ColorText.CYAN))
@@ -63,9 +89,10 @@ def create_chroma_vector_store_from_pdf_data(pdf_file_path, chunk_size, chunk_ov
 
 
 if __name__ == "__main__":
-    pdf_path = "../Data/ELIS_Report-Sociale-2024.pdf"
+    pdf_path = "../Data"
     vector_store = create_chroma_vector_store_from_pdf_data(
         pdf_path,
+        'txt',
         1000,
         0,
         "nomic-embed-text")

@@ -5,7 +5,8 @@ from langchain_core.runnables import RunnablePassthrough
 
 
 __prompt_template = """
-Your are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. 
+Your are an assistant for question-answering tasks. 
+Use the following pieces of retrieved context to answer the question. 
 If you don't know the answer, just say that you don't know.
 
 <context>

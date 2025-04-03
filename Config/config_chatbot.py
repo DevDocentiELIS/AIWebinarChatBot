@@ -5,14 +5,13 @@ from Config.colors import ColorText
 import os
 
 __BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-__DATA_FILE_PATH = os.path.join(__BASE_DIR, "Data", "WebinarBOTData.pdf")
-
 __OPS_SUCCESS_PREFIX = "[SUCCESS]"
 __OPS_FAILURE_PREFIX = "[FAILURE]"
 __CONFIG_PARAMS = {
     "embedding_model": "nomic-embed-text:latest",
     "chat_model": "mistral:latest",
-    "data_source_path": __DATA_FILE_PATH,
+    "data_source_path": os.path.join(__BASE_DIR, "Data"),
+    "data_files_extension": "txt",
     "text_chunk_size": 1000,
     "text_chunks_overlap": 0
 }
@@ -27,7 +26,8 @@ def run_config():
     )
 
     vectorstore = create_chroma_vector_store_from_pdf_data(
-        pdf_file_path=__CONFIG_PARAMS["data_source_path"],
+        data_dir_path=__CONFIG_PARAMS["data_source_path"],
+        file_ext=__CONFIG_PARAMS["data_files_extension"],
         chunk_size=__CONFIG_PARAMS["text_chunk_size"],
         chunk_overlap=__CONFIG_PARAMS["text_chunks_overlap"],
         embedding_model=__CONFIG_PARAMS["embedding_model"],
