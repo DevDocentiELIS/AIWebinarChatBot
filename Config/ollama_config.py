@@ -1,3 +1,35 @@
+"""
+OLLAMA CONFIG OPERATIONS MANAGEMENT FILE
+ - called as a module in config_chatbot.py
+ - uses colors.py internal module to enhance log prints
+__________________________________________________________________
+
+Handles ollama config operations using following functions:
+
+ - config_ollama_requirements: (embedding_model:str, chat_model:str)
+
+    calls:
+    - 1: __check_ollama_installed()
+    Check if Ollama is installed by running `ollama --version`.
+    :return: True if Ollama is installed else False.
+    ___________________________________________________________
+    Make sure to have OLLAMA installed before using this function.
+    Make sure to have OLLAMA added to path
+
+    -2: __ollama_model_configuration(model: str) --- 1st call for (embedding model) --- 2nd call for (chat model)
+    checks if the embedding model is correctly installed with OLLAMA.
+    installs selected model if model not available in OLLAMA
+
+        calls:
+            __check_model_availability(model: str)
+            Check if a specific model is found in Ollama.
+                calls:
+                    __get_ollama_models()
+                    Retrieve the list of available models in Ollama by running ollama list
+            __install_selected_model(model: str) (conditional)
+            Install a specific model in Ollama by running ollama pull model
+"""
+
 import subprocess
 import sys
 from Config.colors import ColorText
