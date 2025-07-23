@@ -32,7 +32,6 @@ if user_input:
                 for chunk in response.iter_content(chunk_size=128, decode_unicode=True):
                     if chunk:
                         full_answer += chunk
-                        # Update the placeholder with the streaming content
                         placeholder.markdown(full_answer)
             else:
                 full_answer = f"Error: {response.status_code} - {response.text}"

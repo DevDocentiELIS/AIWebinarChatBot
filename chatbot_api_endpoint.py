@@ -6,6 +6,7 @@ app = Flask(__name__)
 CORS(app)
 model_endpoint = llm_inference_endpoint()
 
+
 @app.route('/ask', methods=['POST'])
 def ask():
     data = request.get_json()
