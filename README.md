@@ -40,7 +40,7 @@ I dati vengono indicizzati tramite **ChromaDB** come **vector store**, mentre l'
 
 ## ⚙️ Requisiti
 
-- **Python 3.9+**
+- **Python 3.10+**
 - [Ollama](https://ollama.ai) (installato e aggiunto al PATH)
 - Modelli Ollama (embedding e chat model)
 
