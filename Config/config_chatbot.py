@@ -47,6 +47,9 @@ def run_config() -> (langchain_chroma.Chroma, ChatOllama):
     4 - Creates an instance of ChatOllama using the selected LLM as the APP Ai to perform Q&A tasks
     :return: vectorstore (instance of ChromaBD), model (instance of ChatOllama)
     """
+    if not os.path.exists("Data"):
+        os.mkdir("Data")
+
     ops_prefix = f"[CONFIG][CHATBOT]"
     print(ColorText.colorize(f"{ops_prefix} Starting Chatbot Architecture configuration", ColorText.CYAN))
 
