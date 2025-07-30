@@ -16,17 +16,11 @@ def ask():
     user_question = data["question"]
 
     def generate():
-        # Stream tokens from the model endpoint.
-        # Option A: Just yield tokens as plain text
         for token in model_endpoint.stream(user_question):
-            # If needed, you can process token formatting here.
-            # For a simple text stream:
             yield token
-            # Option B: For an SSE-like format, do:
-            # yield f"data: {token}\n\n"
 
-    # Use a plain text MIME type or "text/event-stream" for SSE
-    return Response(generate(), mimetype='text/plain')  # Or "text/event-stream" if using SSE
+    return Response(generate(), mimetype='text/plain')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
